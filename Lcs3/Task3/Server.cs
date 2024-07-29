@@ -30,7 +30,7 @@ namespace Task3
                 udpClient.Close();
             });
 
-            while (ServerWork)
+            while (ServerWork && !token.IsCancellationRequested)
             {
                 try
                 {
@@ -60,18 +60,6 @@ namespace Task3
                     });
 
                 }
-                catch (ObjectDisposedException)
-                {
-                    
-                    if (!ServerWork)
-                    {
-                        Console.WriteLine("Сервер завершает работу...");
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Сообщение об ошибке: " + ex.Message);
@@ -82,3 +70,4 @@ namespace Task3
         }
     }
 }
+
