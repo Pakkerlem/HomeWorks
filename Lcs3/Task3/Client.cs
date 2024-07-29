@@ -20,12 +20,7 @@ namespace Task3
                 Console.WriteLine("Введите Exit для завершения");
                 string userText = Console.ReadLine();
 
-                if (userText.Equals("Exit", StringComparison.OrdinalIgnoreCase))
-                {
-                    break;
-                }
-
-                Message msg = new Message(name, "Привет");
+                Message msg = new Message(name, userText);
                 string responseMsgJs = msg.ToJson();
                 byte[] responseDate = Encoding.UTF8.GetBytes(responseMsgJs);
                 await udpClient.SendAsync(responseDate, ep);
@@ -34,6 +29,11 @@ namespace Task3
                 string answerMsgJs = Encoding.UTF8.GetString(answerData);
                 Message answerMsg = Message.FromJson(answerMsgJs);
                 Console.WriteLine(answerMsg.ToString());
+                
+                if (userText.Equals("Exit", StringComparison.OrdinalIgnoreCase))
+                {
+                    break;
+                }
             }
 
             udpClient.Close();

@@ -34,5 +34,9 @@ namespace Task3
             return String.Format($"{this.DateTime.ToString()} - {this.UserName} : {this.Text}");
         }
 
+        public string ShortMes()
+        {
+            return String.Format(this.Text);
+        }
     }
 }
